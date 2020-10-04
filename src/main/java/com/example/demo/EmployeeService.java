@@ -105,20 +105,37 @@ public class EmployeeService {
                 p1 = p2;
             }
         }
-        
 
     	if(sortColumn=="") {
     		query.orderBy(cb.asc(root.get("id"))); 
     	}else {
-    		switch(sortType){
-            case "DESC" :
-            	//降序
-            	query.orderBy(cb.desc(root.get(sortColumn))); 
-    			break; 
-            case "ASC" :
-    			//升序
-            	query.orderBy(cb.asc(root.get(sortColumn))); 
-    			break; 
+    		if(sortColumn.equals("department.name"))
+    		{
+
+        		switch(sortType){
+                case "DESC" :
+                	//降序
+                	query.orderBy(cb.desc(root.join("department").get("name"))); 
+        			break; 
+                case "ASC" :
+        			//升序
+                	query.orderBy(cb.asc(root.join("department").get("name"))); 
+        			break; 
+        		}
+    		}
+    		else
+    		{
+
+        		switch(sortType){
+                case "DESC" :
+                	//降序
+                	query.orderBy(cb.desc(root.get(sortColumn))); 
+        			break; 
+                case "ASC" :
+        			//升序
+                	query.orderBy(cb.asc(root.get(sortColumn))); 
+        			break; 
+        		}
     		}
     	}
         

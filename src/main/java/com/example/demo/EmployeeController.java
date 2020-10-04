@@ -114,7 +114,6 @@ public class EmployeeController {
 	   if(sortType == null) {
 		   sortType = "ASC";
 	   }
-	   	
 	   Page<Employee> list = service.getEmployeeByEmployeee(employee, page, size, sortColumn, sortType);
 	   return new ResponseEntity<Page<Employee>>(list, HttpStatus.OK);
     }
