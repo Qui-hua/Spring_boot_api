@@ -41,7 +41,14 @@ public class EmployeeController {
     ////新增
     @PostMapping
     public ResponseEntity<Employee> createEmployee(Employee employee)
-                                                      {
+    {
+    	String check = checkEmployee( employee);
+    	if(!check.equals(""))
+    	{
+    	    HttpHeaders headers = new HttpHeaders();
+    	    headers.add("state", check);
+            return new ResponseEntity<Employee>(null,headers, HttpStatus.OK);
+    	}
         Employee createEmployee = service.addEmployee(employee);
         return new ResponseEntity<Employee>(createEmployee, HttpStatus.OK);
     }
@@ -52,10 +59,8 @@ public class EmployeeController {
     	String check = checkEmployee( employee);
     	if(!check.equals(""))
     	{
-
     	    HttpHeaders headers = new HttpHeaders();
-    	    headers.add("state", "check");
-
+    	    headers.add("state", check);
             return new ResponseEntity<Employee>(null,headers, HttpStatus.OK);
     	}
 

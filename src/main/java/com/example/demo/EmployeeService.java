@@ -66,7 +66,7 @@ public class EmployeeService {
          //檢查查詢條件
         Predicate p1 = null;
         if (employee.getEmployee_id()!=null && !employee.getEmployee_id().equals("")) {
-            System.out.println("正在操作eid！！！");
+            System.out.println("正在操作Employee_id！！！");
             Predicate p2 = cb.equal(root.get(Employee_.employee_id), employee.getEmployee_id());
             if (p1 != null) {
                 p1=cb.and(p1, p2);

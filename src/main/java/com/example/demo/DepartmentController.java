@@ -43,6 +43,13 @@ public class DepartmentController {
     @PostMapping
     public ResponseEntity<Department> createDepartment(Department department)
     {
+
+    	if(department.getName() == null || department.getName().equals(""))
+    	{
+    	    HttpHeaders headers = new HttpHeaders();
+    	    headers.add("state", "Please input department name!");
+            return new ResponseEntity<Department>(null,headers, HttpStatus.OK);
+    	}
         Department createDepartment = service.addDepartment(department);
         return new ResponseEntity<Department>(createDepartment, HttpStatus.OK);
     }
